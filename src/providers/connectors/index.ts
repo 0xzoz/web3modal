@@ -19,6 +19,7 @@ import opera from "./opera";
 import web3auth from "./web3auth";
 import bitkeep from "./bitkeep";
 import starzwallet from "./starzwallet";
+import tallyhowallet from "./tallyhowallet";
 
 export {
   injected,
@@ -42,5 +43,6 @@ export {
   opera,
   bitkeep,
   starzwallet,
+  tallyhowallet,
   web3auth
 };

@@ -36,6 +36,8 @@ import SequenceLogo from "../logos/sequence.svg";
 import BitkeepLogo from "../logos/bitkeepwallet.png";
 // @ts-ignore
 import StarzWalletLogo from "../logos/starzwallet.svg";
+// @ts-ignore
+import TallyHoLogo from "../logos/tallyho.svg";
 
 
 import { IProviderInfo } from "../../helpers";
@@ -222,5 +224,13 @@ export const STARZWALLET: IProviderInfo = {
   logo: StarzWalletLogo,
   type: "injected",
   check: "isStarzWallet"
+};
+
+export const TALLYHOWALLET: IProviderInfo = {
+  id: "injected",
+  name: "Tally",
+  logo: TallyHoLogo,
+  type: "injected",
+  check: "isTally"
 };
 

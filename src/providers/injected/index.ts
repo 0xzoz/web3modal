@@ -43,7 +43,7 @@ import CeloExtensionWalletLogo from "../logos/celoExtensionWallet.svg";
 // @ts-ignore
 import BlockWalletLogo from "../logos/blockwallet.svg";
 // @ts-ignore
-import TallyLogo from "../logos/tally.svg";
+import TallyHoLogo from "../logos/tallyho.svg";
 // @ts-ignore
 import PortalLogo from "../logos/portal.svg";
 // @ts-ignore
@@ -233,8 +233,8 @@ export const BLOCKWALLET: IProviderInfo = {
 
 export const TALLYINJECTED: IProviderInfo = {
   id: "injected",
-  name: "Tally",
-  logo: TallyLogo,
+  name: "TallyHo",
+  logo: TallyHoLogo,
   type: "injected",
   check: "isTally"
 };

@@ -245,6 +245,12 @@ class App extends React.Component<any, any> {
           infuraId
         }
       },
+      tallyhowallet: {
+        package: true,
+      },
+      starzwallet: {
+        package: true
+      },
       web3auth: {
         package: Web3Auth,
         options: {
