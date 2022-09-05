@@ -151,6 +151,7 @@ export class Core {
   // --------------- PRIVATE METHODS --------------- //
 
   private renderModal() {
+    console.log('userOptions', this.userOptions)
     const el = document.createElement("div");
     el.id = WEB3_CONNECT_MODAL_ID;
     document.body.appendChild(el);

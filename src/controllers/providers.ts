@@ -42,8 +42,9 @@ export class ProviderController {
     this.shouldCacheProvider = opts.cacheProvider;
     this.providerOptions = opts.providerOptions;
     this.network = opts.network;
-
+ console.log('this.injectedProvider', this.injectedProvider)
     this.injectedProvider = getInjectedProvider();
+    console.log('this.injectedProvider', this.injectedProvider)
 
     this.providers = Object.keys(list.connectors).map((id: string) => {
       let providerInfo: IProviderInfo;

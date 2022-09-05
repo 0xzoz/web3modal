@@ -20,6 +20,8 @@ export function checkInjectedProviders(): IInjectedProvidersMap {
     Object.values(injected).forEach(provider => {
       const isAvailable = verifyInjectedProvider(provider.check);
       if (isAvailable) {
+        console.log(`Detected ${provider.name}`);
+        console.log('fallbackProvider is false', fallbackProvider)
         result[provider.check] = true;
         fallbackProvider = false;
       }
@@ -31,12 +33,13 @@ export function checkInjectedProviders(): IInjectedProvidersMap {
       result[injected.OPERA.check] = true;
       fallbackProvider = false;
     }
-
+    console.log('fallbackProvider is true', fallbackProvider)
     if (fallbackProvider) {
       result[injected.FALLBACK.check] = true;
     }
+    console.log('what is fallbackProvider', result[injected.FALLBACK.check])
   }
-
+console.log('result before', result)
   return result;
 }
 
@@ -51,13 +54,14 @@ export function verifyInjectedProvider(check: string): boolean {
 export function getInjectedProvider(): IProviderInfo | null {
   let result = null;
 
-  const injectedProviders = checkInjectedProviders();
-
+  const injectedProviders = ();
+  console.log( 'injectedProviders', injectedProviders)
   if (injectedProviders.injectedAvailable) {
     delete injectedProviders.injectedAvailable;
     const checks = Object.keys(injectedProviders);
     result = getProviderInfoFromChecksArray(checks);
   }
+  console.log('result', result)
   return result;
 }
 
@@ -171,27 +175,36 @@ export function filterProviders(
   param: string,
   value: string | null
 ): IProviderInfo {
+  console.log("filterProviders", param, value);
   if (!value) return providers.FALLBACK;
   const match = filterMatches<IProviderInfo>(
     Object.values(providers),
     x => x[param] === value,
     providers.FALLBACK
   );
+  console.log("filterProviders", match || providers.FALLBACK);
   return match || providers.FALLBACK;
 }
 
 export function filterProviderChecks(checks: string[]): string {
+  console.log('checks', checks);
   if (!!checks && checks.length) {
     if (checks.length > 1) {
       if (
         checks[0] === injected.METAMASK.check ||
-        checks[0] === injected.CIPHER.check
+        checks[0] === injected.CIPHER.check ||
+        (checks[0] === injected.FALLBACK.check && checks[1] === injected.TALLYHOINJECTED.check)
       ) {
+        console.log("filterProviderChecks use 1", checks[1]);
         return checks[1];
       }
     }
+    console.log("filterProviderChecks use 0", checks[0]);
+
     return checks[0];
   }
+  console.log("filterProviderChecks use fallback", providers.FALLBACK.check );
+
   return providers.FALLBACK.check;
 }
 

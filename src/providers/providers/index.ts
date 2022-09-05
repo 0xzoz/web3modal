@@ -226,11 +226,11 @@ export const STARZWALLET: IProviderInfo = {
   check: "isStarzWallet"
 };
 
-export const TALLYHOWALLET: IProviderInfo = {
-  id: "tallyhowallet",
-  name: "Tally",
-  logo: TallyHoLogo,
-  type: "injected",
-  check: "isTally"
-};
+// export const TALLYHOWALLET: IProviderInfo = {
+//   id: "tallyhowllet",
+//   name: "Tally",
+//   logo: TallyHoLogo,
+//   type: "injected",
+//   check: "isTally"
+// };
 
