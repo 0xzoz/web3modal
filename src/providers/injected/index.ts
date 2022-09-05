@@ -233,7 +233,7 @@ export const BLOCKWALLET: IProviderInfo = {
 
 export const TALLYINJECTED: IProviderInfo = {
   id: "injected",
-  name: "TallyHo",
+  name: "Tally Ho",
   logo: TallyHoLogo,
   type: "injected",
   check: "isTally"
