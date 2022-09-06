@@ -23,6 +23,8 @@ export function checkInjectedProviders(): IInjectedProvidersMap {
         console.log(`Detected ${provider.name}`);
         console.log('fallbackProvider is false', fallbackProvider)
         result[provider.check] = true;
+        console.log('provider.check', provider.check)
+        console.log('result[provider.check]', result[provider.check])
         fallbackProvider = false;
       }
     });
@@ -44,7 +46,12 @@ console.log('result before', result)
 }
 
 export function verifyInjectedProvider(check: string): boolean {
-  return window.ethereum
+  console.log('check', check === "isTally")
+  let t = (check === "isTally") ? window.tally : window.ethereum ? window.ethereum[check] : window.web3 && window.web3.currentProvider && window.web3.currentProvider[check] 
+  console.log('window', t)
+  return (check === "isTally") 
+    ? window.tally 
+    : window.ethereum
     ? window.ethereum[check]
     : window.web3 &&
         window.web3.currentProvider &&
@@ -54,7 +61,7 @@ export function verifyInjectedProvider(check: string): boolean {
 export function getInjectedProvider(): IProviderInfo | null {
   let result = null;
 
-  const injectedProviders = ();
+  const injectedProviders = checkInjectedProviders();
   console.log( 'injectedProviders', injectedProviders)
   if (injectedProviders.injectedAvailable) {
     delete injectedProviders.injectedAvailable;
@@ -176,6 +183,7 @@ export function filterProviders(
   value: string | null
 ): IProviderInfo {
   console.log("filterProviders", param, value);
+  if(param == "check" && value == "isTally" ) {console.log('Found Tally')}
   if (!value) return providers.FALLBACK;
   const match = filterMatches<IProviderInfo>(
     Object.values(providers),
@@ -183,6 +191,7 @@ export function filterProviders(
     providers.FALLBACK
   );
   console.log("filterProviders", match || providers.FALLBACK);
+  if(param == "check" && value == "isTally" && window.tally && match?.id == "tallyhowallet") {console.log('Found Tally'); match.id = 'injected'}
   return match || providers.FALLBACK;
 }
 
@@ -193,7 +202,7 @@ export function filterProviderChecks(checks: string[]): string {
       if (
         checks[0] === injected.METAMASK.check ||
         checks[0] === injected.CIPHER.check ||
-        (checks[0] === injected.FALLBACK.check && checks[1] === injected.TALLYHOINJECTED.check)
+        (checks[0] === injected.FALLBACK.check && checks[1] === injected.TALLYHOWALLET.check)
       ) {
         console.log("filterProviderChecks use 1", checks[1]);
         return checks[1];

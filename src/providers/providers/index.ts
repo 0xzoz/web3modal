@@ -227,7 +227,7 @@ export const STARZWALLET: IProviderInfo = {
 };
 
 // export const TALLYHOWALLET: IProviderInfo = {
-//   id: "tallyhowllet",
+//   id: "tallyhowallet",
 //   name: "Tally",
 //   logo: TallyHoLogo,
 //   type: "injected",

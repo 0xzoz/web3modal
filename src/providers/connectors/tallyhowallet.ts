@@ -1,18 +1,17 @@
-const ConnectToTallyHo = async () => {
+import detectEthereumProvider from 'tallyho-detect-provider';
+import TallyHoOnboarding from 'tallyho-onboarding'
+
+const ConnectToTallyHo: any = async () => {
     let provider = null;
-    if (typeof window.ethereum !== 'undefined') {
-      provider = window.ethereum;
-      try {
-        await provider.request({ method: 'eth_requestAccounts' })
-      } catch (error) {
-        throw new Error("User Rejected");
-      }
-    } else if (window.web3) {
-      provider = window.web3.currentProvider;
-    } else if (window.celo) {
-      provider = window.celo;
-    } else {
-      throw new Error("No Web3 Provider found");
+    try{
+        provider = await detectEthereumProvider({mustBeTallyHo: true});
+        if (!provider){
+          const onboarding = new TallyHoOnboarding();
+          await onboarding.startOnboarding();
+          throw new Error('No TallyHo Provider found, redirecting to onboarding');
+        }
+    } catch (error) {
+        console.log("User Rejected:"  + error);
     }
     return provider;
   };

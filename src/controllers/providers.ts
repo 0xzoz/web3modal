@@ -41,8 +41,9 @@ export class ProviderController {
     this.disableInjectedProvider = opts.disableInjectedProvider;
     this.shouldCacheProvider = opts.cacheProvider;
     this.providerOptions = opts.providerOptions;
+    console.log('this.providerOptions', this.providerOptions)
     this.network = opts.network;
- console.log('this.injectedProvider', this.injectedProvider)
+    console.log('this.injectedProvider', this.injectedProvider)
     this.injectedProvider = getInjectedProvider();
     console.log('this.injectedProvider', this.injectedProvider)
 
@@ -151,6 +152,7 @@ export class ProviderController {
     const userOptions: IProviderUserOptions[] = [];
 
     providerList.forEach((id: string) => {
+      console.log('id', id)
       let provider = this.getProvider(id);
       if (typeof provider !== "undefined") {
         const { id, name, logo, connector } = provider;
@@ -204,7 +206,9 @@ export class ProviderController {
       const opts = { network: this.network || undefined, ...providerOptions };
       const provider = await connector(providerPackage, opts);
       this.eventController.trigger(CONNECT_EVENT, provider);
+      console.log('this.shouldCacheProvider', this.shouldCacheProvider)
       if (this.shouldCacheProvider && this.cachedProvider !== id) {
+        console.log('cachhhhhhhhh')
         this.setCachedProvider(id);
       }
     } catch (error) {
